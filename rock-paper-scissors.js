@@ -44,11 +44,3 @@ function playRound(humanChoice, computerChoice){
         return `You lose! ${computerChoice} beats ${humanChoice}`
     }
 }
-
-while(humanScore < 5 && computerScore < 5){
-    let humanSelection = getHumanChoice()
-    let computerSelection = getComputerChoice()
-
-    console.log(playRound(humanSelection, computerSelection))
-    console.log(`Your socre is ${humanScore} computer's score is ${computerScore}`)
-}

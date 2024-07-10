@@ -1,5 +1,24 @@
 let humanScore = 0
 let computerScore = 0
+let btnRock = document.getElementById("rock")
+let btnPaper = document.getElementById("paper")
+let btnScissors = document.getElementById("sicssors")
+let divResult = document.getElementById("result")
+let divScore = document.getElementById("score")
+
+btnRock.addEventListener("click", () => {
+    playRound(getHumanChoice("rock"), getComputerChoice())
+})
+
+btnPaper.addEventListener("click", () => {
+    playRound(getHumanChoice("paper"), getComputerChoice())
+})
+
+btnScissors.addEventListener("click", () => {
+    playRound(getHumanChoice("scissors"), getComputerChoice())
+})
+
+
 function getComputerChoice(){
     let randomNumber = Math.floor(Math.random() * 3) + 1
 
@@ -12,35 +31,33 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let choice = Number(prompt("Choose 1 for rock, 2 for paper, 3 for scissors"))
-
-    if(choice === 1){
-        return "rock"
-    }else if(choice === 2){
-        return "paper"
-    }else if(choice === 3){
-        return "scissors"
-    }else{
-        console.log("Choose a valid answer")
-        return getHumanChoice()
-    }
+function getHumanChoice(choice){
+    return choice
 }
 
 function playRound(humanChoice, computerChoice){
+    if(humanScore === 5){
+        return divScore.textContent = `Your socre is ${humanScore} You Win!!!`
+    }else if(computerScore === 5){
+        return divScore.textContent = `You lose computer score is ${computerScore} :(`
+    }
+    
+
     if(humanChoice === "rock" && computerChoice === "scissors"){
         humanScore++
-        return `You win! ${humanChoice} beats ${computerChoice}`
+        divResult.textContent =`You win! ${humanChoice} beats ${computerChoice}`
     }else if(humanChoice === "paper" && computerChoice === "rock"){
         humanScore++ 
-        return `You win! ${humanChoice} beats ${computerChoice}`
+        divResult.textContent =`You win! ${humanChoice} beats ${computerChoice}`
     }else if(humanChoice === "scissors" && computerChoice === "paper"){
         humanScore++ 
-        return `You win! ${humanChoice} beats ${computerChoice}`
+        divResult.textContent =`You win! ${humanChoice} beats ${computerChoice}`
     }else if(humanChoice === computerChoice){
-        return `It's a draw you chose ${humanChoice} and the computer chose ${computerChoice}`
+        divResult.textContent = `It's a draw you chose ${humanChoice} and the computer chose ${computerChoice}`
     }else {
         computerScore++
-        return `You lose! ${computerChoice} beats ${humanChoice}`
+        divResult.textContent = `You lose! ${computerChoice} beats ${humanChoice}`
     }
+
+    divScore.textContent = `Your socre is ${humanScore} computer's score is ${computerScore}`
 }
